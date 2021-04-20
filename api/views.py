@@ -29,11 +29,13 @@ class CommentViewSet(viewsets.ModelViewSet):
         return posts.comments.all()
 
     def perform_create(self, serializer):
+        get_object_or_404(Post, pk=self.kwargs['post_id'])
         return serializer.save(author=self.request.user)
 
 
 class FollowViewSet(viewsets.ModelViewSet):
     serializer_class = FollowSerializer
+    http_method_names = ['get', 'post']
     filter_backends = [filters.SearchFilter]
     search_fields = ['user__username', 'following__username', ]
 
