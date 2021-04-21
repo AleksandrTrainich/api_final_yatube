@@ -49,5 +49,6 @@ class FollowViewSet(viewsets.ModelViewSet):
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
+    http_method_names = ['get', 'post']
     serializer_class = GroupSerializer
     permission_classes = [IsAuthorOrReadOnly]
